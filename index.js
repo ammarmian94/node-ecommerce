@@ -8,6 +8,7 @@ const BrandRouter = require("./routes/Brands");
 const UserRouter = require("./routes/User");
 const AuthRouter = require("./routes/Auth");
 const CartRouter = require("./routes/Cart");
+const OrderRouter = require("./routes/Order");
 
 // middlewares
 server.use(
@@ -22,6 +23,7 @@ server.use("/brands", BrandRouter.router);
 server.use("/users", UserRouter.router);
 server.use("/auth", AuthRouter.router);
 server.use("/cart", CartRouter.router);
+server.use("/orders", OrderRouter.router);
 
 main().catch((err) => console.log(err));
 
