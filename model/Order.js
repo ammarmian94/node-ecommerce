@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 const orderSchema = new Schema({
   items: { type: [Schema.Types.Mixed], required: true },
   user: { type: Schema.Types.ObjectId, ref: "User", required: true },
-  selectedAddress: { type: [Schema.Types.Mixed], required: true },
+  selectedAddress: { type: Schema.Types.Mixed, required: true },
   totalItems: { type: Number, required: true },
   totalAmount: { type: Number, required: true },
   status: { type: String, default: "pending" },

@@ -15,8 +15,8 @@ exports.fetchAllProducts = async (req, res) => {
   // sort = {_sort:"price", _order:"asc"}
   // pagination = {_page:, _limit:10}
   // TODO: we have to try with multiple category and brands after change in frontend
-  let query = Product.find({});
-  let totalProductQuery = Product.find({});
+  let query = Product.find({ deleted: { $ne: true } });
+  let totalProductQuery = Product.find({deleted: { $ne: true }});
   if (req.query.category) {
     query = query.find({ category: req.query.category });
     totalProductQuery = totalProductQuery.find({
@@ -64,7 +64,9 @@ exports.fetchProductById = async (req, res) => {
 exports.updateProduct = async (req, res) => {
   const { id } = req.params;
   try {
-    const doc = await Product.findByIdAndUpdate(id, req.body, { new: true }).exec();
+    const doc = await Product.findByIdAndUpdate(id, req.body, {
+      new: true,
+    }).exec();
     res.status(201).json(doc);
   } catch (error) {
     res.status(400).json(error);
