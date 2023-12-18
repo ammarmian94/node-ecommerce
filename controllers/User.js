@@ -1,10 +1,17 @@
 const { User } = require("../model/User");
 
 exports.fetchUserById = async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.user;
   try {
-    const doc = await User.findById(id, "name email id addresses").exec();
-    res.status(201).json(doc);
+    const user = await User.findById(id);
+    res
+      .status(201)
+      .json({
+        id: user.id,
+        addresses: user.addresses,
+        email: user.email,
+        role: user.role,
+      });
   } catch (error) {
     res.status(400).json(error);
   }
