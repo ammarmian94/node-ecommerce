@@ -77,7 +77,7 @@ passport.use(
             } else {
               const token = jwt.sign(sanitizeUser(user), SECRET_KEY);
               // console.log("local");
-              return done(null, { token }); //this call serializeUser
+              return done(null, { id: user.id, role: user.role }); //this call serializeUser
             }
           }
         );

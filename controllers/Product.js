@@ -2,10 +2,14 @@ const { Product } = require("../model/Product");
 
 exports.createProduct = async (req, res) => {
   const product = new Product(req.body);
+  // console.log("before try", product);
   try {
+    // console.log("in try", product)
     const doc = await product.save();
+    // console.log("try: ", doc);
     res.status(201).json(doc);
   } catch (error) {
+    // console.log("error");
     res.status(400).json(error);
   }
 };
@@ -19,8 +23,8 @@ exports.fetchAllProducts = async (req, res) => {
   if (!req.query.admin) {
     condition.deleted = { $ne: true };
   }
-  let query = Product.find(condition );
-  let totalProductQuery = Product.find( condition );
+  let query = Product.find(condition);
+  let totalProductQuery = Product.find(condition);
   if (req.query.category) {
     query = query.find({ category: req.query.category });
     totalProductQuery = totalProductQuery.find({
